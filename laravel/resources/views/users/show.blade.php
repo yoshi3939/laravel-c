@@ -15,10 +15,13 @@
           @if( Auth::id() !== $user->id )
             <follow-button
               class="ml-auto"
+              :initial-is-followed-by='@json($user->isFollowedBy(Auth::user()))'
+              :authorized='@json(Auth::check())'
+              endpoint="{{ route('users.follow', ['name' => $user->name]) }}"
             >
             </follow-button>
           @endif
-          
+
         </div>
         <h2 class="h5 card-title m-0">
           <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
